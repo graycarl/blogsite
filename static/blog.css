@@ -1,7 +1,18 @@
 body { 
     font-family: "Palatino Linotype", "Vera Sans Yuanti", "STHeiti", "Microsoft YaHei", "Palatino Linotype", "NSimSun", serif; 
-    background-color: #FEFEFE; 
+    background-color: #EEE;
     color: #444;
 /*    font-size: 14px/160%; */
-    width: 40em;
+/*    width: 40em; */
 }
+
+div.article h1 {
+	color: blue;
+	margin-bottom: 5px;
+}
+div.article .authortime {
+	font-size: 60%;
+	color: gray;
+}
+
+

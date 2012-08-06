@@ -1,6 +1,6 @@
 %def headcontent():
 <title>{{title or "no title"}}</title>
-<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="/static/blog.css" rel="stylesheet" />
 %end
 
