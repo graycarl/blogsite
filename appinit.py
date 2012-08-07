@@ -26,7 +26,7 @@ if not os.path.isfile("database/blogs.db"):
 	                VALUES \
 	                (?,datetime(?),?,?)", \
 	             	("Carl Wolf", \
-	                  str(datetime.datetime.now()), \
+	                  str(datetime.datetime.strptime("2012-3-29 20:12:23", "%Y-%m-%d %H:%M:%S")), \
 	                  "this is a title", \
 	                  "<h3>This is a test artical</h3><p>this is test content</p>"
 	                )

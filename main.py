@@ -12,11 +12,25 @@ def index(db):
 	titles = []
 	for d in data:
 		dic = {}
-		dic["id"] = d[0]
-		dic["title"] = d[1]
-		dic["posttime"] = d[2]
+		dic["id"], dic["title"], dic["posttime"] = d
 		titles.append(dic)
 	return template("index", titles=titles)
+
+@app.route("/archive")
+def archive(db):
+	sqlcmd = "select id, title, posttime from blogs"
+	data = db.execute(sqlcmd).fetchall()
+	arts = {}
+	for d in data:
+		dic = {}
+		dic["id"], dic["title"], dic["posttime"] = d
+		dt = datetime.strptime(dic["posttime"], "%Y-%m-%d %H:%M:%S")
+		dt = "%s-%s" % (str(dt.year), str(dt.month))
+		if dt not in arts.keys():
+			arts[dt] = []
+		arts[dt].append(dic)
+	mons = list(arts.keys()); mons.sort(); mons.reverse()
+	return template("archive", arts=arts, mons=mons)
 
 @app.route("/article/<id:int>")
 def show_article(id, db):
