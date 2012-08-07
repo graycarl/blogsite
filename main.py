@@ -1,9 +1,10 @@
 #!\python31\python.exe
 # start file of the site
 
-from bottle import run, template, static_file, request, redirect
+from bottle import run, template, static_file, request, redirect, response
 from appinit import app
 from datetime import datetime
+import users
 
 @app.route("/")
 def index(db):
@@ -42,9 +43,29 @@ def show_article(id, db):
 def static_path(path):
 	return static_file(path, root="static")
 
+@app.route("/login")
+@app.route("/login/<err>")
+def user_login(err=""):
+	err = (err == "error")
+	return template("login_page", with_err=err)
+
+@app.route("/login_check", method="POST")
+def login_check():
+	username = request.POST.username.strip()
+	password = request.POST.password.strip()
+	if users.verify_user(username, password):
+		response.set_cookie(users.cookiename, username, secret=users.cookiesecret)
+		redirect("/")
+	else:
+		redirect("/login/error")
+		
+
 @app.route("/new")
 def new_article():
-	return template("new_edit")
+	if request.get_cookie(users.cookiename, secret=users.cookiesecret):
+		return template("new_edit")
+	else:
+		redirect("/login")
 
 @app.route("/save_article", method="POST")
 def save_article(db):
