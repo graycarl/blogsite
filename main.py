@@ -54,7 +54,7 @@ def login_check():
 	username = request.POST.username.strip()
 	password = request.POST.password.strip()
 	if users.verify_user(username, password):
-		response.set_cookie(users.cookiename, username, secret=users.cookiesecret)
+		users.set_cookie(response)
 		redirect("/")
 	else:
 		redirect("/login/error")
@@ -62,8 +62,18 @@ def login_check():
 
 @app.route("/new")
 def new_article():
-	if request.get_cookie(users.cookiename, secret=users.cookiesecret):
-		return template("new_edit")
+	if users.get_login(request):
+		artid, author, title, content = ("", users.get_login(request), "", "")
+		return template("new_edit", dic = locals())
+	else:
+		redirect("/login")
+
+@app.route("/edit/<artid:int>")
+def edit_article(artid, db):
+	if users.get_login(request):
+		sqlcmd = "select title,author,content from blogs where id = ?"
+		title, author, content = db.execute(sqlcmd, (artid,)).fetchone()
+		return template("new_edit", dic=locals())
 	else:
 		redirect("/login")
 
