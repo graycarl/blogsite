@@ -15,4 +15,8 @@ div.article .authortime {
 	color: gray;
 }
 
+a.control_button {
+	color: gray;
+	font-size: 60%;
+}
 

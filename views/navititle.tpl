@@ -7,5 +7,9 @@
 		<a href="http://weibo.com/graycarl">微博</a>
 		|
 		<a href="http://book.douban.com">读书</a>
+		%if admin:
+		|
+		<a href="/logout">退出</a>
+		%end
 	</p>
 </div>

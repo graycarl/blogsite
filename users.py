@@ -15,3 +15,5 @@ def get_login(request):
 def set_cookie(response):
 	response.set_cookie(cookiename, _username, secret=cookiesecret)
 
+def logout(response):
+	response.delete_cookie(cookiename)	

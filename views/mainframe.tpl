@@ -5,7 +5,8 @@
 %end
 
 %def bodycontent():
-%include navititle
+%setdefault("admin", False)
+%include navititle admin=admin
 %include
 %end
 

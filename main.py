@@ -15,7 +15,7 @@ def index(db):
 		dic = {}
 		dic["id"], dic["title"], dic["posttime"] = d
 		titles.append(dic)
-	return template("index", titles=titles)
+	return template("index", titles=titles, admin=bool(users.get_login(request)))
 
 @app.route("/archive")
 def archive(db):
@@ -31,13 +31,15 @@ def archive(db):
 			arts[dt] = []
 		arts[dt].append(dic)
 	mons = list(arts.keys()); mons.sort(); mons.reverse()
-	return template("archive", arts=arts, mons=mons)
+	return template("archive", arts=arts, mons=mons, admin=bool(users.get_login(request)))
 
 @app.route("/article/<id:int>")
 def show_article(id, db):
 	sqlcmd = "select author, posttime, title, content from blogs where id=%d;" % id
 	author, posttime, title, content = db.execute(sqlcmd).fetchone()
-	return template("article", title=title, posttime=posttime, author=author, content=content)
+	artid = id
+	admin = bool(users.get_login(request))
+	return template("article", dic=locals(), admin=admin)
 
 @app.route("/static/<path:path>")
 def static_path(path):
@@ -59,6 +61,14 @@ def login_check():
 	else:
 		redirect("/login/error")
 		
+@app.route("/del/<id:int>")
+def del_article(id, db):
+	if users.get_login(request):
+		sqlcmd = "delete from blogs where id = ?"
+		db.execute(sqlcmd, (id,))
+		redirect("/")
+	else:
+		redirect("/login")
 
 @app.route("/new")
 def new_article():
@@ -96,7 +106,9 @@ def save_article(db):
 def err_404(error):
 	return "<p>The site is being building</p>"
 	
+@app.route("/logout")
+def logout():
+	users.logout(response)
+	redirect("/")
 
 run(app, host="localhost", port=8080, debug=True)
-
-

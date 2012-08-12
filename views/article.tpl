@@ -1,9 +1,13 @@
 <div class="article">
-<h1>{{title}}</h1>
+<h1>{{dic["title"]}}
+%if admin:
+<a class="control_button" href="/edit/{{dic["artid"]}}">[编辑]</a>
+%end
+</h1>
 <div class="authortime">
-	<p>{{author}} {{posttime}}</p>
+	<p>{{dic["author"]}} {{dic["posttime"]}}</p>
 </div>
-{{!content}}
+{{!dic["content"]}}
 </div>
 
-%rebase mainframe title=title
+%rebase mainframe title=dic["title"]
