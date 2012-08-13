@@ -111,4 +111,5 @@ def logout():
 	users.logout(response)
 	redirect("/")
 
-run(app, host="localhost", port=8080, debug=True)
+def server_run():
+	run(app, host="localhost", port=8080, debug=True)

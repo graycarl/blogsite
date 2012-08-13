@@ -1,0 +1,13 @@
+basic blogsite:
+[ok] db init
+[ok] show article
+[ok] show archive
+[ok] login function
+[ok] add new article function
+[ok] edit old article function
+[ok] delete article function
+[ok] add some link for admin control
+[ok] logout function
+   * delete confirm function
+   * some page need to redirect back to old page
+   * add code highlight
