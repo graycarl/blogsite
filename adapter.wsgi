@@ -3,7 +3,7 @@
 
 import sys, os, bottle
 cur_path = os.path.abspath(os.path.dirname(__file__))
-sys.path = cur_path + sys.path
+sys.path = [cur_path] + sys.path
 os.chdir(cur_path)
 
 import main
