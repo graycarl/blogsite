@@ -1,7 +1,12 @@
+
+%if admin:
 <ol start="0">
 	<li>
 		<a href="/new">&lt;new article&gt;</a>
 	</li>
+%else:
+<ol>
+%end
 %for t in titles:
 	<li>
 		<a href="/article/{{t["id"]}}">{{t["title"]}}</a>&nbsp;&nbsp;&nbsp;

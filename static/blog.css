@@ -15,6 +15,10 @@ div.article .authortime {
 	color: gray;
 }
 
+div.article pre {
+	background-color: white;
+}
+
 a.control_button {
 	color: gray;
 	font-size: 60%;

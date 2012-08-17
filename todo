@@ -8,6 +8,9 @@ basic blogsite:
 [ok] delete article function
 [ok] add some link for admin control
 [ok] logout function
+[ok] syntax highlight
    * delete confirm function
    * some page need to redirect back to old page
    * add code highlight
+   * add comments function
+   * add picture function

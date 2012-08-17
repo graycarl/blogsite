@@ -3,7 +3,7 @@
 <head>
 	%headcontent()
 </head>
-<body>
+<body onload="prettyPrint()">
 	%bodycontent()
 </body>
 </html>

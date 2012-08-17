@@ -1,5 +1,5 @@
 #!\python31\python.exe
-# start file of the site
+# main frame of the site
 
 from bottle import run, template, static_file, request, redirect, response
 from appinit import app
