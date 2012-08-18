@@ -9,8 +9,8 @@ basic blogsite:
 [ok] add some link for admin control
 [ok] logout function
 [ok] syntax highlight
-   * delete confirm function
-   * some page need to redirect back to old page
-   * add code highlight
+[ok] refactory project
+[ok] add admin bench
+   * make it beautiful
    * add comments function
    * add picture function

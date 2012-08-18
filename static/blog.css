@@ -1,3 +1,6 @@
+html {
+	background-color: #252525;
+}
 body { 
     font-family: "Palatino Linotype", "Vera Sans Yuanti", "STHeiti", "Microsoft YaHei", "Palatino Linotype", "NSimSun", serif; 
     background-color: #EEE;
@@ -6,7 +9,7 @@ body {
 /*    width: 40em; */
 }
 
-div.article h1 {
+article h1 {
 	color: blue;
 	margin-bottom: 5px;
 }
