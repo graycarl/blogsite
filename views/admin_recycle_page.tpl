@@ -1,18 +1,26 @@
 <div id="main">
 	<div id="content">
-		<p>已删除的文章：</p>
+		<article class="artmanage">
+		<section>
 		<ul>
+			%if not blogs:
+			<li>
+				<p class="notify">没有内容</p>
+			</li>
+			%else:
 			%for blog in blogs:
 			<li>
-			<p>{{blog.title}}
-				<a href="/admin/post-article/{{blog.id}}">[重新发布]</a>
-				<a href="/admin/edit/{{blog.id}}">[编辑]</a>
-				<a href="/admin/draft-article/{{blog.id}}">[移至草稿箱]</a>
-				<a href="/admin/del/{{blog.id}}/clean">[彻底删除]</a>
-			</p>
+				<a class="title">{{blog.title}}</a>
+				<a class="control" href="/admin/post-article/{{blog.id}}">[重新发布]</a>
+				<a class="control" href="/admin/edit/{{blog.id}}">[编辑]</a>
+				<a class="control" href="/admin/draft-article/{{blog.id}}">[移至草稿箱]</a>
+				<a class="control" href="/admin/del/{{blog.id}}/clean">[彻底删除]</a>
 			</li>
 			%end
+			%end
 		</ul>
+		</section>
+		</article>
 	</div>
 </div>
 

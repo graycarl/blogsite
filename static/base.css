@@ -73,10 +73,10 @@ div#main {
 	border-width: 0px 1px 0px 0px;
 	border-style: solid;
 	border-color: #222222;
-	padding: 5px;
+	padding: 35px;
 }
 div#content {
-	margin: 30px;
+	margin: 0px;
 }
 
 /* Page Footer CSS */
@@ -97,13 +97,41 @@ body > footer a {
 	color: inherit;
 }
 
+/* Page Button CSS */
+p.pagebutton {
+	text-align: center;
+	padding: 15px;
+	margin: 0px;
+}
+p.pagebutton a {
+	margin: 0px;
+	padding: 7px 15px;
+	color: black;
+	text-decoration: none;
+	background-color: #CCCCCC;
+	border-radius: 3px;
+}
+p.pagebutton a:hover {
+	background-color: #AAAAAA;
+}
+p.pagebutton a.buttonleft {
+	float: left;
+}
+p.pagebutton a.buttonright {
+	float: right;
+}
+p.pagebutton a.buttoncenter {
+}
+
 /* Article CSS */
 article {
 	color: #222222;
 	padding: 10px 0px 30px 0px;
-	margin: 20px 0px;
 	border-color: gray;
 	border-bottom-style: double;
+}
+article + article {
+	margin: 20px 0px 0px 0px;
 }
 article > header {
 	border-width: 0px 0px 1px 0px;
@@ -140,3 +168,79 @@ article h4, article h5, article h6 {
 	font-size: 100%;
 	font-weight: bold;
 }
+
+/* Archive Page CSS */
+article.archive a {
+	color: inherit;
+	text-decoration: none;
+}
+article.archive a:hover {
+	color: #FF4422;
+}
+article.archive a.title {
+	font-weight: bold;
+}
+article.archive a.control {
+	float: right;
+}
+article.archive span.posttag {
+	color: gray;
+	float: right;
+	vertical-align: bottom;
+}
+article.archive section ul {
+	list-style-type: none;
+}
+article.archive section li {
+	margin: 0px 0px 10px 0px;
+	border-bottom-style: dashed;
+	border-bottom-width: 1px;
+}
+
+/* Article Manage Page CSS */
+article.artmanage a {
+	color: inherit;
+	text-decoration: none;
+}
+article.artmanage a:hover {
+	color: #FF4422;
+}
+article.artmanage a.title {
+	font-weight: bold;
+}
+article.artmanage a.control {
+	float: right;
+}
+article.artmanage ul {
+	list-style-type: none;
+	padding: 0px 30px;
+}
+article.artmanage li {
+	margin: 0px 0px 10px 0px;
+	border-bottom-style: dashed;
+	border-bottom-width: 1px;
+}
+article.artmanage p.notify {
+	font-size: 120%;
+	font-weight: bold;
+	text-align: center;
+}
+
+/* Article Edit Page */
+#edit_form {
+	font-size: 12px;
+}
+#edit_form div {
+	padding: 10px;
+}
+#edit_form input.titlebox {
+	font-size: 200%;
+	margin: 0px;
+	width: 100%;
+}
+#edit_form textarea.contentbox {
+	margin: 0px;
+	font-family: Consolas,Monaco,monospace;
+	width: 100%;
+}
+

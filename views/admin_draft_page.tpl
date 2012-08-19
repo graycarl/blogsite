@@ -1,20 +1,21 @@
 <div id="main">
 	<div id="content">
-		<p>草稿箱</p>
+		<article class="artmanage">
 		<ul>
 			%if not blogs:
 			<li>
-				<p>没有内容</p>
+				<p class="notify">没有内容</p>
 			</li>
 			%else:
 			%for blog in blogs:
-			<li><p>
-			<a href="/admin/edit/{{blog.id}}">{{blog.title}}</a>
-			<a href="/admin/del/{{blog.id}}">[删除]</a>
-			</p></li>
+			<li>
+			<a class="title" href="/admin/edit/{{blog.id}}">{{blog.title}}</a>
+			<a class="control" href="/admin/del/{{blog.id}}">[删除]</a>
+			</li>
 			%end
 			%end
 		</ul>
+		</article>
 	</div>
 </div>
 

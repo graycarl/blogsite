@@ -13,22 +13,22 @@
 			f.submit()
 		}
 	</script>
-	<form id="edit_form" class="add" method="POST">
+	<div id="content">
+	<form id="edit_form" class="edit_form" method="POST">
 		<input type="hidden" name="artid" value="{{blog.id}}" />
 		<input name="artauthor" type="hidden" value="{{blog.author}}" />
-		<p>title:
-			<input name="arttitle" type="text" value="{{blog.title}}" />
-		</p>
-		<p>content:<br/>
-			<textarea name="artcontent">{{blog.content}}</textarea>	
-		</p>
+		<div>
+		<input class="titlebox" name="arttitle" type="text" value="{{blog.title}}" />
+		</div>
+		<div>
+		<textarea rows="20" class="contentbox" name="artcontent">{{blog.content}}</textarea>	
+		</div>
 	</form>
-	<p>
-		<ul>
-		<li><input type="button" value="发布文章" onclick="post_article()" /></li>
-		<li><input type="button" value="保存草稿" onclick="draft_article()" /></li>
-		</ul>
+	<p class="pagebutton">
+	<a class="buttonleft" onclick="post_article()" href="/">发布文章</a>
+	<a onclick="draft_article()" href="/" class="buttonright">保存草稿</a>
 	</p>
+	</div>
 </div>
 
 %rebase adminframe title="编辑文章", select_name="new"
