@@ -17,4 +17,4 @@
 	</ul>
 </div>
 
-%rebase mainframe title="Carl's Blog"
+%rebase mainframe title="Carl's Blog",select_name="index"

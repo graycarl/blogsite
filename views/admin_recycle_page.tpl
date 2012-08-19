@@ -16,4 +16,4 @@
 	</div>
 </div>
 
-%rebase adminframe title="回收站"
+%rebase adminframe title="回收站", select_name="recycle"

@@ -1,0 +1,142 @@
+html {
+	background-color: #444444;
+}
+body { 
+    font-family: "Palatino Linotype", "Vera Sans Yuanti", "STHeiti", "Microsoft YaHei", "Palatino Linotype", "NSimSun", serif; 
+    color: #444444;
+	max-width: 1000px;
+	min-width: 400px;
+	margin: 0px auto;
+}
+
+/* Page Header CSS */
+body > header {
+	background-color: rgb(38,51,71);
+	padding: 15px 30px;
+	border-color: #222222;
+	border-style: solid;
+	border-width: 0px 1px 1px 0px;
+}
+body > header h1 {
+	font-size: 300%;
+	color: #FFFFFF;
+	margin: 0px;
+	text-shadow: rgba(0,0,0,0.8) 0px 0px 8px;
+}
+body > header h1 a {
+	color: inherit;
+	text-decoration: none;
+}
+body > header h2 {
+	font-size: 110%;
+	color: #F2F2F2;
+	margin: -5px 0px 0px 10px;
+	color: #BBBBBB;
+	text-shadow: rgba(0,0,0,0.8) 0px 0px 4px;
+}
+body > header p {
+	font-size: 90%;
+	margin: 0px;
+	color: #BBBBBB;
+}
+body > header p a {
+	color: inherit;
+}
+
+/* Page Navigation CSS */
+body > nav {
+	margin: 0px;
+	padding: 6px 35px 10px 35px;
+	font-size: 120%;
+	font-weight: bold;
+}
+
+nav a {
+	color: #BBBBBB;
+	text-decoration: none;
+	border-width: 3px;
+	padding: 2px;
+	margin: 0px 20px 0px 0px;
+	text-shadow: rgba(0,0,0,0.8) 2px 2px 2px;
+}
+nav a.nav_selected {
+	border-bottom-style: solid;
+}
+nav a:hover {
+	border-bottom-style: solid;
+}
+
+/* Page Content CSS */
+div#main {
+	background-image: url("/static/noise.png");
+	background-color: #FFF9F2;
+	border-width: 0px 1px 0px 0px;
+	border-style: solid;
+	border-color: #222222;
+	padding: 5px;
+}
+div#content {
+	margin: 30px;
+}
+
+/* Page Footer CSS */
+body > footer {
+	background-color: rgb(48,61,81);
+	padding: 1px 30px;
+	margin: 0px 0px 30px 0px;
+	border-width: 0px 1px 1px 0px;
+	border-style: solid;
+	border-color: #222222;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	background-clip: border-box, border-box;
+	background-origin: padding-box, padding-box;
+	color: #D9D9D9;
+}
+body > footer a {
+	color: inherit;
+}
+
+/* Article CSS */
+article {
+	color: #222222;
+	padding: 10px 0px 30px 0px;
+	margin: 20px 0px;
+	border-color: gray;
+	border-bottom-style: double;
+}
+article > header {
+	border-width: 0px 0px 1px 0px;
+	border-color: #AAAAAA;
+	border-style: dashed;
+}
+article > header h1 {
+	font-size: 200%;
+	font-weight: bold;
+}
+article > header a {
+	color: inherit;
+	text-decoration: none;
+}
+article > header * {
+	margin: 0px;
+}
+article h2 {
+	font-size: 120%;
+	font-weight: bold;
+	margin: 20px 0px 10px 0px;
+	padding: 7px 10px;
+	background-color: rgba(0,0,0,0.2);
+}
+article h3 {
+	font-size: 100%;
+	font-weight: bold;
+	padding: 3px 10px;
+	border-width: 1px;
+	border-color: #AAAAAA;
+	background-color: rgba(0,0,0,0.1);
+}
+article h4, article h5, article h6 {
+	font-size: 100%;
+	font-weight: bold;
+}

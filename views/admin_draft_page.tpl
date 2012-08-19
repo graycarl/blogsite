@@ -18,4 +18,4 @@
 	</div>
 </div>
 
-%rebase adminframe title="草稿箱"
+%rebase adminframe title="草稿箱", select_name="draft"

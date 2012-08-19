@@ -15,4 +15,4 @@
 	</div>
 </div>
 
-%rebase mainframe title="文章存档"
+%rebase mainframe title="文章存档",select_name="archive"

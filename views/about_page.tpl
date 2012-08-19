@@ -7,4 +7,4 @@
 	</div>
 </div>
 
-%rebase mainframe title="关于我"
+%rebase mainframe title="关于我", select_name="about"

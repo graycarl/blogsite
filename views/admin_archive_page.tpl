@@ -15,4 +15,4 @@
 	</div>
 </div>
 
-%rebase adminframe title="所有博客"
+%rebase adminframe title="所有博客", select_name="archive"

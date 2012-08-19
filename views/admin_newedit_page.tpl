@@ -31,4 +31,4 @@
 	</p>
 </div>
 
-%rebase adminframe title="编辑文章"
+%rebase adminframe title="编辑文章", select_name="new"
