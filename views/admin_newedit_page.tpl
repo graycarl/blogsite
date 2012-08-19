@@ -25,8 +25,8 @@
 		</div>
 	</form>
 	<p class="pagebutton">
-	<a class="buttonleft" onclick="post_article()" href="/">发布文章</a>
-	<a onclick="draft_article()" href="/" class="buttonright">保存草稿</a>
+	<a class="buttonleft" href="javascript:post_article()" >发布文章</a>
+	<a href="javascript:draft_article()" class="buttonright">保存草稿</a>
 	</p>
 	</div>
 </div>

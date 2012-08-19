@@ -116,9 +116,11 @@ p.pagebutton a:hover {
 }
 p.pagebutton a.buttonleft {
 	float: left;
+	margin: -7px 0px 0px 0px;
 }
 p.pagebutton a.buttonright {
 	float: right;
+	margin: -7px 0px 0px 0px;
 }
 p.pagebutton a.buttoncenter {
 }
@@ -244,3 +246,7 @@ article.artmanage p.notify {
 	width: 100%;
 }
 
+/* Login Page CSS */
+#login_form {
+	text-align: center;
+}
