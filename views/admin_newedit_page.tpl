@@ -19,9 +19,18 @@
 		<input name="artauthor" type="hidden" value="{{blog.author}}" />
 		<div>
 		<input class="titlebox" name="arttitle" type="text" value="{{blog.title}}" />
+		<select class="contypesel" name="artcontype">
+			%if blog.contype == blog.contype_markdown:
+			<option value="markdown" selected="selected">markdown</option>
+			<option value="html">html</option>
+			%elif blog.contype == blog.contype_html:
+			<option value="markdown">markdown</option>
+			<option value="html" selected="selected">html</option>
+			%end
+		</select>
 		</div>
 		<div>
-		<textarea rows="20" class="contentbox" name="artcontent">{{blog.content}}</textarea>	
+		<textarea class="contentbox" name="artcontent" onkeydown="return catchTab(this, event)">{{blog.content}}</textarea>	
 		</div>
 	</form>
 	<p class="pagebutton">

@@ -8,6 +8,12 @@ from datetime import datetime
 import users
 import blogs
 
+contype_markdown = blogs.Blog.contype_markdown
+contype_html = blogs.Blog.contype_html
+status_posted = blogs.Blog.status_posted
+status_draft = blogs.Blog.status_draft
+status_deleted = blogs.Blog.status_deleted
+
 # Nornal Views
 ##########################################################################
 @app.route("/")
@@ -76,11 +82,11 @@ def admin_edit_article(db, id):
 @app.route("/admin/new-article")
 def admin_new_article(db, id=""):
 	prepare_admin(request)
-	blog = blogs.Blog()
-	blog.id, blog.author, blog.title, blog.content \
-		= ("", users.get_login(request), "", "")
+	id, author, title, content, contype = \
+			("", users.get_login(request), "", "", contype_markdown)
+	blog = blogs.Blog(**locals())
 	if id:
-		blog = blogs.get_article(db, id, status=blogs.status_draft)
+		blog = blogs.get_article(db, id, status=status_draft)
 	return template("admin_newedit_page", blog=blog)
 
 @app.route("/admin/post-article", method="POST")
@@ -88,21 +94,22 @@ def admin_new_article(db, id=""):
 def admin_post_article(db, id=None):
 	prepare_admin(request)
 	if id:
-		blogs.update_article(db, id, status=blogs.status_posted)
+		blogs.update_article(db, id, status=status_posted)
 		redirect("/admin")
 	else:
-		blog = blogs.Blog()
-		blog.id = request.POST.get("artid", "").strip()
-		blog.author = request.POST.artauthor or "Nobody"
-		blog.posttime = str(datetime.now())
-		blog.title = request.POST.arttitle or "No Title"
-		blog.content = request.POST.artcontent or "<p>No content</p>"
+		id = request.POST.get("artid", "").strip()
+		author = request.POST.artauthor or "Nobody"
+		posttime = str(datetime.now())
+		title = request.POST.arttitle or "No Title"
+		content = request.POST.artcontent or "<p>No content</p>"
+		contype = request.POST.artcontype or None
+		blog = blogs.Blog(**locals())
 		if blog.id:
 			blog.id = int(blog.id)
 			blogs.update_article(db, blog.id, title=blog.title, \
-					content=blog.content, status=blogs.status_posted)
+				content=blog.content, contype=contype,status=status_posted)
 		else:
-			blogs.add_article(db, blog, status=blogs.status_posted)
+			blogs.add_article(db, blog, status=status_posted)
 		redirect("/admin")
 
 @app.route("/admin/draft-article", method="POST")
@@ -110,27 +117,28 @@ def admin_post_article(db, id=None):
 def admin_draft_article(db, id=None):
 	prepare_admin(request)
 	if id:
-		blogs.update_article(db, id, status=blogs.status_draft)
+		blogs.update_article(db, id, status=status_draft)
 		redirect("/admin/draft")
 	else:
-		blog = blogs.Blog()
-		blog.id = request.POST.get("artid", "").strip()
-		blog.author = request.POST.artauthor
-		blog.posttime = str(datetime.now())
-		blog.title = request.POST.arttitle
-		blog.content = request.POST.artcontent
+		id = request.POST.get("artid", "").strip()
+		author = request.POST.artauthor
+		posttime = str(datetime.now())
+		title = request.POST.arttitle
+		content = request.POST.artcontent
+		contype = request.POST.artcontype or None
+		blog = blogs.Blog(**locals())
 		if blog.id:
 			blog.id = int(blog.id)
 			blogs.update_article(db, blog.id, title=blog.title, \
-					content=blog.content, status=blogs.status_draft)
+					content=blog.content, status=status_draft)
 		else:
-			blogs.add_article(db, blog, status=blogs.status_draft)
+			blogs.add_article(db, blog, status=status_draft)
 		redirect("/admin/draft")
 
 @app.route("/admin/draft")
 def admin_draft(db):
 	prepare_admin(request)
-	articles = blogs.get_latest_titles(db, 10, status=blogs.status_draft)
+	articles = blogs.get_latest_titles(db, 10, status=status_draft)
 	return template("admin_draft_page", blogs=articles)
 
 @app.route("/admin/del/<id:int>")
@@ -141,7 +149,7 @@ def admin_del_article(db, id, clean=None):
 	if clean and clean.strip() == "clean": 
 		ok = blogs.remove_article(db, id)
 	else: 
-		ok = blogs.update_article(db, id, status=blogs.status_deleted)
+		ok = blogs.update_article(db, id, status=status_deleted)
 	if ok: redirect(oldurl)
 	else: return HTTPError(404, "Article not found")
 
@@ -151,7 +159,7 @@ def admin_recycle(db, page=1):
 	prepare_admin(request)
 	count = 10; offset = (page-1)*count
 	articles = blogs.get_latest_titles(db, count, offset, \
-			status=blogs.status_deleted)
+			status=status_deleted)
 	return template("admin_recycle_page", blogs=articles, page=page)
 
 @app.route("/admin/archive")

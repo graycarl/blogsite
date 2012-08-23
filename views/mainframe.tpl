@@ -5,11 +5,10 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<link href="/static/base.css" rel="stylesheet" />
 		<link href="/static/main.css" rel="stylesheet" />
-		<link href="/static/prettify/prettify.css" type="text/css" rel="stylesheet" />
-		<script type="text/javascript" src="/static/prettify/prettify.js"></script>
+		<link href="/static/code.css" rel="stylesheet" />
 		<script type="text/javascript" src="/static/my.js"></script>
 	</head>
-	<body onload="prettyPrint()">
+	<body>
 		<header>
 			<hgroup>
 				<h1><a name="doctop" href="/">CARL GRAY</a></h1>
@@ -28,5 +27,6 @@
 		</nav>
 		%include 
 		%include footer
+		<!--[if lt IE 9]><div style="position:fixed;top:0;left:0;right:0;bottom:0;background:black;z-index:999999999;text-align:center;"><a href="http://godarkforie.org/upgrade"><img src="http://godarkforie.org/gonedark.jpg" alt="You are using an old version of Internet Explorer. Click here to find out more about the Going Dark For IE movement." /></a></div><![endif]-->		
 	</body>
 </html>

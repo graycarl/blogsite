@@ -238,12 +238,18 @@ article.artmanage p.notify {
 #edit_form input.titlebox {
 	font-size: 200%;
 	margin: 0px;
-	width: 100%;
+	width: 80%;
 }
 #edit_form textarea.contentbox {
 	margin: 0px;
 	font-family: Consolas,Monaco,monospace;
 	width: 100%;
+	min-height: 400px;
+}
+#edit_form select.contypesel {
+	font-size: 200%;
+	margin: 0px;
+	width: 19%;
 }
 
 /* Login Page CSS */

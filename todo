@@ -11,7 +11,16 @@ basic blogsite:
 [ok] syntax highlight
 [ok] refactory project
 [ok] add admin bench
-   * make it beautiful
+[ok] make it beautiful
+[ok] detect ie < 8
+[ok] add markdown syntax supports
+[ok]	status str
+[ok]	remove prettyprint
+[ok]	add pygment css
+[ok]	enable tab key when edit
+   * modify textbutton from <a> to <input>
+   * add edit preview function
    * add comments function
    * add picture function
    * add search function
+   * implement a local post tools

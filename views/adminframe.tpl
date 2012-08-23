@@ -6,11 +6,10 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<link href="/static/base.css" rel="stylesheet" />
 		<link href="/static/admin.css" rel="stylesheet" />
-		<link href="/static/prettify/prettify.css" type="text/css" rel="stylesheet" />
-		<script type="text/javascript" src="/static/prettify/prettify.js"></script>
+		<link href="/static/code.css" rel="stylesheet" />
 		<script type="text/javascript" src="/static/my.js"></script>
 	</head>
-	<body onload="prettyPrint()">
+	<body>
 		<header>
 			<p><a href="/">回首页</a></p>
 			<h1><a href="/admin">博客管理</a></h1>
