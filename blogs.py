@@ -38,7 +38,7 @@ class Blog(object):
 
 	@property
 	def markdown(self):
-		if self.contype == contype_markdown:
+		if self.contype == self.contype_markdown:
 			return self.content
 		return None
 
@@ -92,7 +92,7 @@ def init_db(dbfile):
 	posttime = str(datetime.strptime("2012-7-29 20:34:29","%Y-%m-%d %H:%M:%S"))
 	title = "This just a test"
 	content = "##This is markdown article\nthis is some paragragh\nnext line"
-	contype = contype_markdown
+	contype = Blog.contype_markdown
 	conn.execute(insertcmd, 
 			(author, posttime, title, content, contype, status))
 	            
