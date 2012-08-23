@@ -125,12 +125,12 @@ def admin_draft_article(db, id=None):
 		posttime = str(datetime.now())
 		title = request.POST.arttitle
 		content = request.POST.artcontent
-		contype = request.POST.artcontype or None
+		contype = request.POST.artcontype
 		blog = blogs.Blog(**locals())
 		if blog.id:
 			blog.id = int(blog.id)
 			blogs.update_article(db, blog.id, title=blog.title, \
-					content=blog.content, status=status_draft)
+				content=blog.content, contype=contype,status=status_draft)
 		else:
 			blogs.add_article(db, blog, status=status_draft)
 		redirect("/admin/draft")

@@ -182,11 +182,12 @@ def add_article(db, blog, status=Blog.status_posted):
 	add new article to database.
 	return True for success, False for failed.
 	"""
-	sqlcmd = "insert into blogs (author, posttime, title, content, status) \
-			values (?, datetime(?), ?, ?, ?)"
+	sqlcmd = "insert into blogs \
+			(author, posttime, title, content, contype, status) \
+			values (?, datetime(?), ?, ?, ?, ?)"
 	blog.status = status
 	re = db.execute(sqlcmd, (blog.author, blog.posttime, blog.title, \
-						blog.content, blog.status))
+						blog.content, blog.contype, blog.status))
 	return re.rowcount == 1
 
 def update_article(db, id, **dic):
