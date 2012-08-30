@@ -170,6 +170,14 @@ article h4, article h5, article h6 {
 	font-size: 100%;
 	font-weight: bold;
 }
+article.entire blockquote {
+	background: #DDDDDD;
+	font-size: 80%;
+	padding: 3px 10px;
+}
+article.entire strong {
+	color: #005599;
+}
 
 /* Archive Page CSS */
 article.archive a {
