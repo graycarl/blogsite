@@ -259,6 +259,10 @@ article.artmanage p.notify {
 	margin: 0px;
 	width: 19%;
 }
+#picture_form {
+	font-size: 12px;
+	padding: 10px;
+}
 
 /* Login Page CSS */
 #login_form {

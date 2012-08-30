@@ -44,11 +44,10 @@ class Blog(object):
 
 
 def init_db(dbfile):
-	""" (dbfile) -> status
+	""" (dbfile) -> none
 	
 	init database file, include creating file and creating tables.
 	@dbfile: database file path
-	@status: if initialized successful
 	"""
 	import sqlite3
 	conn = sqlite3.connect(dbfile)
@@ -95,7 +94,7 @@ def init_db(dbfile):
 	contype = Blog.contype_markdown
 	conn.execute(insertcmd, 
 			(author, posttime, title, content, contype, status))
-	            
+
 	conn.commit()
 	conn.close()
 	

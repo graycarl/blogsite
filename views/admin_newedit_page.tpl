@@ -29,9 +29,19 @@
 			%end
 		</select>
 		</div>
+		
 		<div>
 		<textarea class="contentbox" name="artcontent" onkeydown="return catchTab(this, event)">{{blog.content}}</textarea>	
 		</div>
+	</form>
+	<form id="picture_form" class="picture_form" action="/admin/up-picture" method="POST" target="upiframe" enctype="multipart/form-data">
+		<iframe name="upiframe" style="display:none;"></iframe>
+		<ul id="pic_list">
+		</ul>
+		<p>
+		<input type="file" name="imagedata" />
+		<input type="submit" value="AddPicture" />
+		</p>
 	</form>
 	<p class="pagebutton">
 	<a class="buttonleft" href="javascript:post_article()" >发布文章</a>

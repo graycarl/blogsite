@@ -7,6 +7,8 @@ from appinit import app
 from datetime import datetime
 import users
 import blogs
+import images
+from io import BytesIO
 
 contype_markdown = blogs.Blog.contype_markdown
 contype_html = blogs.Blog.contype_html
@@ -18,20 +20,20 @@ status_deleted = blogs.Blog.status_deleted
 ##########################################################################
 @app.route("/")
 @app.route("/page/<page:int>")
-def index(db, page=1):
+def index(blogdb, page=1):
 	num = 3; offset = (page-1)*num
-	blog = blogs.get_latest_articles(db, num, offset)
-	next = bool(blogs.get_latest_articles(db, num, offset+num))
+	blog = blogs.get_latest_articles(blogdb, num, offset)
+	next = bool(blogs.get_latest_articles(blogdb, num, offset+num))
 	return template("index_page", blogs=blog, next=next, page=page)
 
 @app.route("/archive")
-def archive(db):
-	mons, arts = blogs.get_archive(db)
+def archive(blogdb):
+	mons, arts = blogs.get_archive(blogdb)
 	return template("archive_page", arts=arts, mons=mons)
 
 @app.route("/article/<id:int>")
-def show_article(id, db):
-	blog = blogs.get_article(db, id)
+def show_article(id, blogdb):
+	blog = blogs.get_article(blogdb, id)
 	if blog:
 		return template("article_page", blog=blog)
 	return HTTPError(404, "Page not found")
@@ -68,33 +70,33 @@ def logout():
 	redirect("/")
 
 @app.route("/admin")
-def admin_main(db):
+def admin_main(blogdb):
 	prepare_admin(request)
-	articles = blogs.get_latest_titles(db, 10)
+	articles = blogs.get_latest_titles(blogdb, 10)
 	return template("admin_main_page", blogs=articles)
 		
 @app.route("/admin/edit/<id:int>")
-def admin_edit_article(db, id):
+def admin_edit_article(blogdb, id):
 	prepare_admin(request)
-	blog = blogs.get_article(db, id)
+	blog = blogs.get_article(blogdb, id)
 	return template("admin_newedit_page", blog=blog)
 
 @app.route("/admin/new-article")
-def admin_new_article(db, id=""):
+def admin_new_article(blogdb, id=""):
 	prepare_admin(request)
 	id, author, title, content, contype = \
 			("", users.get_login(request), "", "", contype_markdown)
 	blog = blogs.Blog(**locals())
 	if id:
-		blog = blogs.get_article(db, id, status=status_draft)
+		blog = blogs.get_article(blogdb, id, status=status_draft)
 	return template("admin_newedit_page", blog=blog)
 
 @app.route("/admin/post-article", method="POST")
 @app.route("/admin/post-article/<id:int>")
-def admin_post_article(db, id=None):
+def admin_post_article(blogdb, id=None):
 	prepare_admin(request)
 	if id:
-		blogs.update_article(db, id, status=status_posted)
+		blogs.update_article(blogdb, id, status=status_posted)
 		redirect("/admin")
 	else:
 		id = request.POST.get("artid", "").strip()
@@ -106,18 +108,18 @@ def admin_post_article(db, id=None):
 		blog = blogs.Blog(**locals())
 		if blog.id:
 			blog.id = int(blog.id)
-			blogs.update_article(db, blog.id, title=blog.title, \
+			blogs.update_article(blogdb, blog.id, title=blog.title, \
 				content=blog.content, contype=contype,status=status_posted)
 		else:
-			blogs.add_article(db, blog, status=status_posted)
+			blogs.add_article(blogdb, blog, status=status_posted)
 		redirect("/admin")
 
 @app.route("/admin/draft-article", method="POST")
 @app.route("/admin/draft-article/<id:int>")
-def admin_draft_article(db, id=None):
+def admin_draft_article(blogdb, id=None):
 	prepare_admin(request)
 	if id:
-		blogs.update_article(db, id, status=status_draft)
+		blogs.update_article(blogdb, id, status=status_draft)
 		redirect("/admin/draft")
 	else:
 		id = request.POST.get("artid", "").strip()
@@ -129,44 +131,62 @@ def admin_draft_article(db, id=None):
 		blog = blogs.Blog(**locals())
 		if blog.id:
 			blog.id = int(blog.id)
-			blogs.update_article(db, blog.id, title=blog.title, \
+			blogs.update_article(blogdb, blog.id, title=blog.title, \
 				content=blog.content, contype=contype,status=status_draft)
 		else:
-			blogs.add_article(db, blog, status=status_draft)
+			blogs.add_article(blogdb, blog, status=status_draft)
 		redirect("/admin/draft")
 
 @app.route("/admin/draft")
-def admin_draft(db):
+def admin_draft(blogdb):
 	prepare_admin(request)
-	articles = blogs.get_latest_titles(db, 10, status=status_draft)
+	articles = blogs.get_latest_titles(blogdb, 10, status=status_draft)
 	return template("admin_draft_page", blogs=articles)
 
 @app.route("/admin/del/<id:int>")
 @app.route("/admin/del/<id:int>/<clean>")
-def admin_del_article(db, id, clean=None):
+def admin_del_article(blogdb, id, clean=None):
 	prepare_admin(request)
 	oldurl = request.get("HTTP_REFERER", "/admin")
 	if clean and clean.strip() == "clean": 
-		ok = blogs.remove_article(db, id)
+		ok = blogs.remove_article(blogdb, id)
 	else: 
-		ok = blogs.update_article(db, id, status=status_deleted)
+		ok = blogs.update_article(blogdb, id, status=status_deleted)
 	if ok: redirect(oldurl)
 	else: return HTTPError(404, "Article not found")
 
 @app.route("/admin/recycle")
 @app.route("/admin/recycle/page/<page:int>")
-def admin_recycle(db, page=1):
+def admin_recycle(blogdb, page=1):
 	prepare_admin(request)
 	count = 10; offset = (page-1)*count
-	articles = blogs.get_latest_titles(db, count, offset, \
+	articles = blogs.get_latest_titles(blogdb, count, offset, \
 			status=status_deleted)
 	return template("admin_recycle_page", blogs=articles, page=page)
 
 @app.route("/admin/archive")
-def admin_archive_page(db):
+def admin_archive_page(blogdb):
 	prepare_admin(request)
-	mons, titles = blogs.get_archive(db)
+	mons, titles = blogs.get_archive(blogdb)
 	return template("admin_archive_page", mons=mons, titles=titles)
+
+# For picture service
+##########################################################################
+@app.route("/admin/up-picture", method="POST")
+def admin_up_picture(imagedb):
+	data = request.files.imagedata.file.read()
+	print(data.__class__)
+	id = images.add_picture(imagedb, "", data)
+	return '<a href="/pictures/%d">/picures/%d</a>' %  (id,id)
+
+@app.route("/pictures/<id:int>")
+def get_picture(imagedb, id):
+	data = images.get_picture(imagedb, id)
+	if data:
+		imagefile = BytesIO(data.encode())
+		return imagefile
+	else:
+		return HTTPError(404, "Picture not found")
 
 
 # Other Handlers
@@ -182,4 +202,4 @@ def static_path(path):
 # Run Server with debug mode
 ###########################################################################
 if __name__ == "__main__":
-	run(app, host="localhost", port=8080, debug=True, reloader=True)
+	run(app, host="localhost", port=8080, debug=True)
