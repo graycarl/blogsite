@@ -12,7 +12,10 @@
 					<li>
 						<a href="/article/{{art.id}}">{{art.title}}</a>
 						%dt = art.posttime.split()[0]
-						<span class="posttag"><time datetime="{{dt}}">{{dt}}</time></span>
+						<span class="posttag">
+							(<a href="/article/{{art.id}}#disqus_thread"></a>)
+							<time datetime="{{dt}}">{{dt}}</time>
+						</span>
 					</li>
 				%end
 				</ul>

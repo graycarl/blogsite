@@ -27,6 +27,21 @@
 		</nav>
 		%include 
 		%include footer
+
+        <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'carlblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+            s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+        </script>
+
+
 		<!--[if lt IE 9]><div style="position:fixed;top:0;left:0;right:0;bottom:0;background:black;z-index:999999999;text-align:center;"><a href="http://godarkforie.org/upgrade"><img src="http://godarkforie.org/gonedark.jpg" alt="You are using an old version of Internet Explorer. Click here to find out more about the Going Dark For IE movement." /></a></div><![endif]-->		
 	</body>
 </html>
