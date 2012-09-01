@@ -9,10 +9,11 @@ import bottle.ext.sqlite
 import os
 
 import blogs
+from blogconf import blogconf
 
 app = bottle.Bottle()
 
-dbfile = "database/blogs.db"
+dbfile = blogconf.get("db", "filename")
 
 # init database if need
 if not os.path.isfile(dbfile):
