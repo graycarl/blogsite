@@ -24,7 +24,7 @@ def add_picture(db, extstr, data):
 	@picture_id: reture the id
 	"""
 	sqlcmd = "insert into pictures (ext, data) values (?,?)"
-	db.execute(sqlcmd, (extstr, data))
+	db.execute(sqlcmd, (extstr, buffer(data)))
 	rowid = db.execute("select last_insert_rowid()").fetchone()
 	rowid = int(rowid[0])
 	return rowid

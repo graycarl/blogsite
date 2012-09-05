@@ -2,3 +2,7 @@
 database
 *.pyc
 *.swp
+tags
+
+bottle.py
+bottle_sqlite.py

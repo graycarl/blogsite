@@ -8,7 +8,7 @@ from datetime import datetime
 import users
 import blogs
 import images
-from io import BytesIO
+from StringIO import StringIO
 
 contype_markdown = blogs.Blog.contype_markdown
 contype_html = blogs.Blog.contype_html
@@ -112,6 +112,7 @@ def admin_post_article(blogdb, id=None):
 				content=blog.content, contype=contype,status=status_posted)
 		else:
 			blogs.add_article(blogdb, blog, status=status_posted)
+		blogdb.commit()
 		redirect("/admin")
 
 @app.route("/admin/draft-article", method="POST")
@@ -152,7 +153,7 @@ def admin_del_article(blogdb, id, clean=None):
 		ok = blogs.remove_article(blogdb, id)
 	else: 
 		ok = blogs.update_article(blogdb, id, status=status_deleted)
-	if ok: redirect(oldurl)
+	if ok: blogdb.commit();redirect(oldurl)
 	else: return HTTPError(404, "Article not found")
 
 @app.route("/admin/recycle")
@@ -175,15 +176,23 @@ def admin_archive_page(blogdb):
 @app.route("/admin/up-picture", method="POST")
 def admin_up_picture(imagedb):
 	data = request.files.imagedata.file.read()
-	print(data.__class__)
 	id = images.add_picture(imagedb, "", data)
-	return '<a href="/pictures/%d">/picures/%d</a>' %  (id,id)
+	return """
+	<script type="text/javascript">
+		ulpics = parent.document.getElementById("pic_list")
+		newli = document.createElement("li")
+		newli.innerHTML = '<a href="/pictures/%d">/pictures/%d</a>'
+		ulpics.appendChild(newli)
+	</script>
+	""" % (id, id)
+
 
 @app.route("/pictures/<id:int>")
 def get_picture(imagedb, id):
 	data = images.get_picture(imagedb, id)
 	if data:
-		imagefile = BytesIO(data.encode())
+		imagefile = StringIO(str(data))
+		response.add_header("Content-type", "image/jpg")
 		return imagefile
 	else:
 		return HTTPError(404, "Picture not found")
