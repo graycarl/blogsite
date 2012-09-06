@@ -36,12 +36,14 @@
 	</form>
 	<form id="picture_form" class="picture_form" action="/admin/up-picture" method="POST" target="upiframe" enctype="multipart/form-data">
 		<iframe name="upiframe" style="display:none;"></iframe>
+		<div>
 		<ul id="pic_list">
 		</ul>
 		<p>
 		<input type="file" name="imagedata" />
 		<input type="submit" value="AddPicture" />
 		</p>
+		</div>
 	</form>
 	<p class="pagebutton">
 	<a class="buttonleft" href="javascript:post_article()" >发布文章</a>

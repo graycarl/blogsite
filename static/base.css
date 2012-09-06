@@ -261,6 +261,8 @@ article.artmanage p.notify {
 }
 #picture_form {
 	font-size: 12px;
+}
+#picture_form div {
 	padding: 10px;
 }
 

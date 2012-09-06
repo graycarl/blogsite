@@ -175,6 +175,7 @@ def admin_archive_page(blogdb):
 ##########################################################################
 @app.route("/admin/up-picture", method="POST")
 def admin_up_picture(imagedb):
+	prepare_admin(request)
 	data = request.files.imagedata.file.read()
 	id = images.add_picture(imagedb, "", data)
 	return """
