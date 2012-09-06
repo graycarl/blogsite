@@ -47,6 +47,6 @@ def get_picture(db, id):
 	@imageid: id of the picture to get
 	@imagedata: return the picture content as bytes
 	"""
-	sqlcmd = "select data from pictures where id=?"
+	sqlcmd = "select ext,data from pictures where id=?"
 	re = db.execute(sqlcmd, (id,)).fetchone()
-	return re[0]
+	return (re[0],re[1])

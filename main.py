@@ -177,7 +177,8 @@ def admin_archive_page(blogdb):
 def admin_up_picture(imagedb):
 	prepare_admin(request)
 	data = request.files.imagedata.file.read()
-	id = images.add_picture(imagedb, "", data)
+	imagetype = request.files.imagedata.type
+	id = images.add_picture(imagedb, imagetype, data)
 	return """
 	<script type="text/javascript">
 		ulpics = parent.document.getElementById("pic_list")
@@ -190,10 +191,10 @@ def admin_up_picture(imagedb):
 
 @app.route("/pictures/<id:int>")
 def get_picture(imagedb, id):
-	data = images.get_picture(imagedb, id)
+	imagetype,data = images.get_picture(imagedb, id)
 	if data:
 		imagefile = StringIO(str(data))
-		response.add_header("Content-type", "image/jpg")
+		response.add_header("Content-type", imagetype)
 		return imagefile
 	else:
 		return HTTPError(404, "Picture not found")
